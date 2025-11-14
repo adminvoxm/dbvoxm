@@ -32,6 +32,8 @@ shadow_port = 54320
 # The database major version to use. This has to be the same as your remote database's. Run `SHOW
 # server_version;` on the remote database to check.
 major_version = 17
+url = "postgres://postgres:qTPs6@icdPocjKTF@db.uhzplrubjkbowkkoznrn.supabase.co:5432/postgres"
+
 
 [db.pooler]
 enabled = false
