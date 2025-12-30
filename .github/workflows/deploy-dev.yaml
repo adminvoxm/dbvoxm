@@ -48,4 +48,4 @@ jobs:
         run: supabase db push
 
       - name: Deploy Edge Functions
-        run: supabase functions deploy --prune --import-map ./supabase/functions/deno.json
+        run: supabase functions deploy --prune
