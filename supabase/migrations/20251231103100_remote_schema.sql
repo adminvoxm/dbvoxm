@@ -22,13 +22,24 @@ using ((bucket_id = 'app'::text));
 using ((bucket_id = 'app'::text));
 
 
-DROP POLICY IF EXISTS "Update 22ox_0" ON "storage"."objects";
-  create policy "Update 22ox_0"
-  on "storage"."objects"
-  as permissive
-  for update
-  to authenticated
-using ((bucket_id = 'app'::text));
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_policies
+        WHERE schemaname = 'storage'
+        AND tablename = 'objects'
+        AND policyname = 'Update 22ox_0'
+    ) THEN
+        create policy "Update 22ox_0"
+          on "storage"."objects"
+          as permissive
+          for update
+          to authenticated
+          using ((bucket_id = 'app'::text));
+    END IF;
+END
+$$;
 
 
 
