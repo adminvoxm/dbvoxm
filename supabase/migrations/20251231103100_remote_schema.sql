@@ -22,7 +22,7 @@ using ((bucket_id = 'app'::text));
 using ((bucket_id = 'app'::text));
 
 
-
+DROP POLICY IF EXISTS "Update 22ox_0" ON "storage"."objects";
   create policy "Update 22ox_0"
   on "storage"."objects"
   as permissive
