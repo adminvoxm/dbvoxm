@@ -1,0 +1,13 @@
+{
+  "imports": {
+    "std/": "https://deno.land/std@0.177.0/",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2",
+    "nodemailer": "npm:nodemailer@6.9.13",
+    "@aws-sdk/client-s3": "npm:@aws-sdk/client-s3@3.525.0",            
+    "@aws-sdk/client-transcribe": "npm:@aws-sdk/client-transcribe@3.525.0" 
+  },
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "strictNullChecks": false
+  }
+}
