@@ -22,9 +22,6 @@ jobs:
         with:
           version: latest
 
-      - name: Link to Supabase Project
-        run: supabase link --project-ref $SUPABASE_PROJECT_ID --password $SUPABASE_DB_PASSWORD
-
       # NOUVELLE ÉTAPE : On injecte tes secrets spécifiques dans Supabase
       - name: Set Edge Function Secrets
         run: |
