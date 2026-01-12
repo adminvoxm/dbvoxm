@@ -46,3 +46,18 @@ jobs:
 
       - name: Deploy Edge Functions
         run: supabase functions deploy --prune
+      
+      - name: Setup Cron Job via SQL (Native PSQL - Fix IPv6)
+        env:
+          PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_ID_DEV }}
+          SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY_DEV }}
+          DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD_DEV }}
+        run: |
+          sudo apt-get update && sudo apt-get install -y postgresql-client
+
+          FUNCTION_URL="https://${PROJECT_REF}.supabase.co/functions/v1/participations-cleanup"
+          
+          SQL_QUERY="select cron.schedule('nettoyage-quotidien', '0 4 * * *', \$\$ select net.http_post(url:='$FUNCTION_URL', headers:='{\"Content-Type\": \"application/json\", \"Authorization\": \"Bearer $SERVICE_ROLE\"}'::jsonb, body:='{}'::jsonb); \$\$);"
+
+          psql "postgresql://postgres:${DB_PASSWORD}@db.${PROJECT_REF}.supabase.co:6543/postgres?sslmode=require" -c "$SQL_QUERY"
+        
