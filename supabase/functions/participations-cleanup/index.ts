@@ -2,8 +2,8 @@ import { createClient } from "@supabase/supabase-js";
 
 // Définition de la structure de vos données (Typage fort)
 interface ParticipationItem {
-  id: string;
-  file_url: string | null;
+  target_id: string;      // Nouveau nom
+  target_file_url: string | null; // Nouveau nom
 }
 
 const BUCKET_NAME = 'participations_files'; 
@@ -33,9 +33,10 @@ Deno.serve(async (_req) => { // Correction 1 : _req au lieu de req
 
   // Correction 2 : On utilise le type défini plus haut au lieu de 'any'
   items.forEach((item: ParticipationItem) => {
-    idsToUpdate.push(item.id)
-    if (item.file_url) {
-      const urlParts = item.file_url.split(`${BUCKET_NAME}/`)
+    idsToUpdate.push(item.target_id) // Ici c'est target_id maintenant
+
+    if (item.target_file_url) { // Ici c'est target_file_url
+      const urlParts = item.target_file_url.split(`${BUCKET_NAME}/`)
       if (urlParts.length > 1) {
         filePaths.push(urlParts[1])
       }
