@@ -47,12 +47,3 @@ jobs:
 
       - name: Deploy Edge Functions
         run: supabase functions deploy --prune
-
-        - name: Setup Cron Job via SQL (Workaround)
-        env:
-          PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_ID_STAGING }}
-          SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY_STAGING }}
-        run: |
-          FUNCTION_URL="https://${PROJECT_REF}.supabase.co/functions/v1/participations-cleanup"
-          SQL_QUERY="select cron.schedule('nettoyage-quotidien', '0 4 * * *', \$\$ select net.http_post(url:='$FUNCTION_URL', headers:='{\"Content-Type\": \"application/json\", \"Authorization\": \"Bearer $SERVICE_ROLE\"}'::jsonb, body:='{}'::jsonb); \$\$);"
-          supabase db query --project-ref $PROJECT_REF --password ${{ secrets.SUPABASE_DB_PASSWORD_STAGING }} "$SQL_QUERY"
