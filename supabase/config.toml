@@ -426,7 +426,6 @@ entrypoint = "./functions/transcribe-audio/index.ts"
 [functions.participations-cleanup]
 enabled = true
 verify_jwt = true
-schedule = "0 4 * * *" # 
 import_map = "./functions/participations-cleanup/deno.json"
 # Uncomment to specify a custom file path to the entrypoint.
 # Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
