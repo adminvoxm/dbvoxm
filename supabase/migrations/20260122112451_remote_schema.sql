@@ -1,4 +1,4 @@
-alter table "public"."entity" drop constraint "entity_old_ref_key";
+alter table "public"."entity" drop constraint if exists "entity_old_ref_key";
 
 drop index if exists "public"."entity_old_ref_key";
 
