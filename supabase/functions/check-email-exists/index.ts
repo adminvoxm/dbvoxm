@@ -1,4 +1,3 @@
-import { serve } from "std/http/server.ts";
 import { createClient } from "@supabase/supabase-js";
 
 // Init Supabase client avec la clé de rôle de service
@@ -12,7 +11,7 @@ const rawOrigins = Deno.env.get("CORS_ALLOWED_ORIGINS") ?? "";
 const allowedOrigins = rawOrigins.split(",").map((o) => o.trim());
 const prodUrl = Deno.env.get("PROD_URL")!
 
-serve(async (req) => {
+Deno.serve(async (req) => {
     const origin = req.headers.get("origin") || "";
     
     // En-têtes CORS dynamiques
