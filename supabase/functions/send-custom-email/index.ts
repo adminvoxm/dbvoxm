@@ -1,4 +1,3 @@
-import { serve } from "std/http/server.ts";
 import nodemailer from "nodemailer"; 
 
 // --- GESTION CORS ET VARIABLES D'ENV ---
@@ -14,7 +13,7 @@ const SES_USER = Deno.env.get("SES_SMTP_USER");
 const SES_PASS = Deno.env.get("SES_SMTP_PASS"); 
 const FROM_EMAIL = Deno.env.get("SES_FROM_EMAIL"); 
 
-serve(async (req) => {
+Deno.serve(async (req) => {
     const origin = req.headers.get("origin") || "";
     
     // Définition des en-têtes CORS dynamiques

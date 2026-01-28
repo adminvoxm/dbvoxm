@@ -1,6 +1,5 @@
 // Deno + Supabase Edge Function (TypeScript)
 import { createClient } from "@supabase/supabase-js";
-import { serve } from "std/http/server.ts";
 
 // --- Helpers ---
 
@@ -61,7 +60,7 @@ function makeCorsHeaders(req: Request) {
   };
 }
 
-serve(async (req) => {
+Deno.serve(async (req) => {
   const headers = makeCorsHeaders(req);
 
   // Gestion de la requête OPTIONS (Pre-flight CORS)
